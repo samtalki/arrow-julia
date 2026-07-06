@@ -39,6 +39,7 @@ include(joinpath(@__DIR__, "testtables.jl"))
 include(joinpath(@__DIR__, "testappend.jl"))
 include(joinpath(@__DIR__, "integrationtest.jl"))
 include(joinpath(@__DIR__, "dates.jl"))
+include(joinpath(@__DIR__, "cdata.jl"))
 
 struct CustomStruct
     x::Int
@@ -348,6 +349,7 @@ end
             @test isa(first(av.indices), Signed)
             @test length(av) == 3
             @test eltype(av) == Union{String,Missing}
+            @test isequal(collect(av), Union{String,Missing}["a", "bb", missing])
 
             av = Arrow.toarrowvector(CategoricalArray(["a", "bb", "ccc"]))
             @test isa(first(av.indices), Signed)

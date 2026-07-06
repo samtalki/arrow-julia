@@ -232,9 +232,10 @@ function arrowvector(
             inds = copyto!(similar(Vector{signedtype(length(pool))}, length(refa)), refa)
         end
         # adjust to "offset" instead of index
-        inds .-= firstindex(refa)
+        inds .-= firstindex(pool)
+        pooldata = firstindex(pool) == 1 ? pool : collect(pool)
         data = arrowvector(
-            pool,
+            pooldata,
             i,
             nl,
             fi,
